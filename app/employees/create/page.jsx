@@ -31,9 +31,11 @@ const NewEmployee = () => {
               const { value, done } = await reader.read();
               if (done) break;
               const receivedData = new TextDecoder().decode(value);
-              const receivedCardID = receivedData.trim(); // Seri porttan gelen veri
+              const receivedCardID = receivedData.trim() // Seri porttan gelen veri
+              console.log(receivedCardID);
               setCardID(receivedCardID);
               setStep(2); // Step 2'ye geçiş yap
+              
             }
           } catch (error) {
             console.error('Error reading data:', error);
@@ -59,7 +61,7 @@ const NewEmployee = () => {
     if ('serial' in navigator) {
       initializeSerial();
     } else {
-      console.log('Web Serial API is not supported in this browser.');
+      alert('Web Serial API is not supported in this browser.');
     }
 
     return () => {
@@ -76,7 +78,7 @@ const NewEmployee = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
+    <div className=" mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
       {step === 1 && (
         <div>
           <p>Step 1: Port seçme kısmı</p>
@@ -97,6 +99,30 @@ const NewEmployee = () => {
                 id="cardID"
                 disabled
                 value={cardID}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+               <label htmlFor="name" className="block font-medium mb-2">
+                Adı:
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+                <label htmlFor="surname" className="block font-medium mb-2">
+                Soyadı:
+              </label>
+              <input
+                type="text"
+                id="surname"
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+               <label htmlFor="mail" className="block font-medium mb-2">
+                Mail Adresi:
+              </label>
+              <input
+                type="text"
+                id="mail"
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
             </div>
